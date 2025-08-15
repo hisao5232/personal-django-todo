@@ -8,4 +8,5 @@ urlpatterns = [
     path('login/', auth_views.LoginView.as_view(template_name='login.html'), name='login'),
     path('tasks/', views.task_list, name='task_list'),
     path('tasks/add/', views.task_create, name='task_create'),
+    path('tasks/delete/<int:pk>/', views.task_delete, name='task_delete'),
 ]
