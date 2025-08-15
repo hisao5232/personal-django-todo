@@ -1,7 +1,27 @@
-<h1>タスク編集</h1>
-<form method="post">
+{% extends 'base.html' %}
+{% block title %}タスク編集{% endblock %}
+
+{% block content %}
+<h1 class="mb-4">タスク編集</h1>
+
+<form method="post" class="needs-validation" novalidate>
     {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">更新</button>
+    <div class="mb-3">
+        <label for="id_title" class="form-label">タイトル</label>
+        {{ form.title }}
+    </div>
+    <div class="mb-3">
+        <label for="id_due_date" class="form-label">期限日</label>
+        {{ form.due_date }}
+    </div>
+    <div class="mb-3">
+        <label for="id_description" class="form-label">詳細（任意）</label>
+        {{ form.description }}
+    </div>
+    <div class="mb-3 form-check">
+        {{ form.completed }}
+        <label class="form-check-label" for="id_completed">完了</label>
+    </div>
+    <button type="submit" class="btn btn-primary">更新</button>
 </form>
-<a href="{% url 'task_list' %}">戻る</a>
+{% endblock %}

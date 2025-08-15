@@ -1,11 +1,27 @@
-{% extends "base.html" %}
+{% extends 'base.html' %}
+{% block title %}タスク追加{% endblock %}
 
 {% block content %}
-<h2>タスク追加</h2>
-<form method="post">
+<h1 class="mb-4">タスク追加</h1>
+
+<form method="post" class="needs-validation" novalidate>
     {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">追加</button>
+    <div class="mb-3">
+        <label for="id_title" class="form-label">タイトル</label>
+        {{ form.title }}
+    </div>
+    <div class="mb-3">
+        <label for="id_due_date" class="form-label">期限日</label>
+        {{ form.due_date }}
+    </div>
+    <div class="mb-3">
+        <label for="id_description" class="form-label">詳細（任意）</label>
+        {{ form.description }}
+    </div>
+    <div class="mb-3 form-check">
+        {{ form.completed }}
+        <label class="form-check-label" for="id_completed">完了</label>
+    </div>
+    <button type="submit" class="btn btn-primary">追加</button>
 </form>
-<a href="{% url 'task_list' %}">戻る</a>
 {% endblock %}

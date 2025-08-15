@@ -1,23 +1,35 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>タスク一覧</title>
-</head>
-<body>
-    <h1>タスク一覧</h1>
-    <a href="{% url 'task_create' %}">タスク追加</a>
-    <ul>
-        {% for task in tasks %}
-            <li>{{ task.title }} - {% if task.completed %}完了{% else %}未完了{% endif %}
-                {% if task.due_date %} - 期限: {{ task.due_date|date:"Y年n月j日（l）" }}{% endif %}
-                <a href="{% url 'task_detail' task.pk %}">詳細</a>
-                <a href="{% url 'task_update' task.pk %}">編集</a>
-                <a href="{% url 'task_delete' task.pk %}" onclick="return confirm('本当に削除しますか？');">削除</a>
-            </li>
-        {% empty %}
-            <li>タスクはありません</li>
-        {% endfor %}
-    </ul>
-</body>
-</html>
+{% extends 'base.html' %}
+{% block title %}タスク一覧{% endblock %}
 
+{% block content %}
+<h1 class="mb-4">タスク一覧</h1>
+
+<!-- タスク追加ボタン -->
+<div class="mb-4">
+    <a href="{% url 'task_create' %}" class="btn btn-success">タスク追加</a>
+</div>
+
+<div class="row">
+    {% for task in tasks %}
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">{{ task.title }}</h5>
+                {% if task.due_date %}
+                <p class="card-text">期限日: {{ task.due_date|date:"Y年n月j日（l）" }}</p>
+                {% endif %}
+                <p class="card-text">
+                    詳細: {{ task.description|default:"-"|slice:":10" }}{% if task.description|length > 10 %}…{% endif %}
+                </p>
+                <p class="card-text">ステータス: {% if task.completed %}<span class="badge bg-success">完了</span>{% else %}<span class="badge bg-warning text-dark">未完了</span>{% endif %}</p>
+                <a href="{% url 'task_detail' task.pk %}" class="btn btn-primary btn-sm">詳細</a>
+                <a href="{% url 'task_update' task.pk %}" class="btn btn-secondary btn-sm">編集</a>
+                <a href="{% url 'task_delete' task.pk %}" class="btn btn-danger btn-sm" onclick="return confirm('本当に削除しますか？');">削除</a>
+            </div>
+        </div>
+    </div>
+    {% empty %}
+    <p>タスクはありません。</p>
+    {% endfor %}
+</div>
+{% endblock %}
