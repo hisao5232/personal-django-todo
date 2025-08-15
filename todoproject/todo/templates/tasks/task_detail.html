@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>{{ task.title }}</h2>
+<p>{{ task.description }}</p>
+<p>ステータス: {% if task.completed %}完了{% else %}未完了{% endif %}</p>
+
+<!-- 完了/未完了切替リンク -->
+<form action="{% url 'task_toggle' task.pk %}" method="post" style="display:inline;">
+    {% csrf_token %}
+    <button type="submit">
+        {% if task.completed %}未完了にする{% else %}完了にする{% endif %}
+    </button>
+</form>
+
+<a href="{% url 'task_list' %}">一覧に戻る</a>
+{% endblock %}

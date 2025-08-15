@@ -9,6 +9,7 @@
     <ul>
         {% for task in tasks %}
             <li>{{ task.title }} - {% if task.completed %}完了{% else %}未完了{% endif %}
+                <a href="{% url 'task_detail' task.pk %}">詳細</a>
                 <a href="{% url 'task_delete' task.pk %}" onclick="return confirm('本当に削除しますか？');">削除</a>
             </li>
         {% empty %}

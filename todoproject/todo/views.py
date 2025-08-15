@@ -25,3 +25,13 @@ def task_delete(request, pk):
     task = get_object_or_404(Task, pk=pk)
     task.delete()
     return redirect('task_list')
+
+def task_detail(request, pk):
+    task = get_object_or_404(Task, pk=pk)
+    return render(request, 'tasks/task_detail.html', {'task': task})
+
+def task_toggle(request, pk):
+    task = get_object_or_404(Task, pk=pk)
+    task.completed = not task.completed
+    task.save()
+    return redirect('task_detail', pk=pk)
