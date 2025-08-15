@@ -1,37 +1,34 @@
 # Python
+*.pyc
 __pycache__/
-*.py[cod]
 *.pyo
 *.pyd
-*.pkl
-*.sqlite3
-*.log
 
-# Django
-*.pot
-*.pyc
-db.sqlite3
-/staticfiles/
-/media/
-/.env
-
-# Virtual environment
+# Virtual Environment
 venv/
 ENV/
 env/
-.venv/
 
-# IDE関連
+# Django
+*.sqlite3
+*.log
+
+# Static files
+todoproject/staticfiles/
+
+# Media files (ユーザーアップロード)
+media/
+
+# Environment variables
+*.env
+
+# IDE / Editor
 .vscode/
 .idea/
+*.swp
 
-# OS関連
+# macOS
 .DS_Store
-Thumbs.db
 
-# PostgreSQL ダンプファイルなど
-*.sql
-*.backup
-
-# Secret key や 環境変数ファイル
-.env
+# Linux
+*~
