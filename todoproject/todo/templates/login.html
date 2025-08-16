@@ -1,14 +1,28 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Login</title>
-</head>
-<body>
-    <h2>Login</h2>
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Login</button>
-    </form>
-</body>
-</html>
+{% extends "base.html" %}
+{% load widget_tweaks %}
+
+{% block title %}ログイン{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-6 col-lg-4">
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <h3 class="card-title text-center mb-4">ログイン</h3>
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="id_username" class="form-label">ユーザー名</label>
+                        {{ form.username|add_class:"form-control" }}
+                    </div>
+                    <div class="mb-3">
+                        <label for="id_password" class="form-label">パスワード</label>
+                        {{ form.password|add_class:"form-control" }}
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100">ログイン</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
