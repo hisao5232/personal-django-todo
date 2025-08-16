@@ -5,7 +5,7 @@ from .forms import TaskForm
 
 @login_required
 def task_list(request):
-    tasks = Task.objects.filter(user=request.user)
+    tasks = Task.objects.filter(user=request.user).order_by('due_date')
     return render(request, 'tasks/task_list.html', {'tasks': tasks})
 
 @login_required
